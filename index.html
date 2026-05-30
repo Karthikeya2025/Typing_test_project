@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typerush</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Typerush</h1>
+    <div class="container">
+        <!-- Test Mode Screen -->
+        <div id="test-screen">
+            <div class="header-controls">
+                <div class="level-selector">
+                    <label for="difficulty">Difficulty: </label>
+                    <select id="difficulty" onchange="init()">
+                        <option value="very-easy">Level 1: Very Easy (Short Words)</option>
+                        <option value="easy">Level 2: Easy (Simple Sentences)</option>
+                        <option value="medium" selected>Level 3: Medium (Standard)</option>
+                        <option value="hard">Level 4: Hard (Punctuation & Numbers)</option>
+        
+                    </select>
+                </div>
+
+                <div class="duration-selector">
+                    <label>Duration: </label>
+                    <div class="duration-presets">
+                        <button class="preset-btn" onclick="setDuration(15)">15s</button>
+                        <button class="preset-btn active" onclick="setDuration(30)">30s</button>
+                        <button class="preset-btn" onclick="setDuration(60)">60s</button>
+                        <button class="preset-btn" onclick="setDuration(120)">2m</button>
+                    </div>
+                    <div class="custom-duration-wrap">
+                        <input
+                            type="number"
+                            id="custom-duration"
+                            value="30"
+                            min="0"
+                            max="600"
+                            title="Custom duration in seconds"
+                            onchange="onCustomDurationChange()"
+                        />
+                        <span class="duration-unit">sec</span>
+                    </div>
+                </div>
+
+                <div class="timer" id="timer">30</div>
+            </div>
+
+            <!-- Hidden input that captures layout keystrokes seamlessly -->
+            <input type="text" id="keyboard-tracker"  autofocus autocomplete="off" autocapitalize="off">
+
+            <div class="text-display" id="text-display" onclick="focusTracker()">
+                <!-- Characters injected here dynamically by script.js -->
+            </div>
+
+            <p class="hint">Click inside the box and start typing to begin the test.</p>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="hidden">
+            <h2>Test Results</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="value" id="res-wpm">0</span>
+                    <span class="label">WPM</span>
+                </div>
+                <div class="metric-card">
+                    <span class="value" id="res-cpm">0</span>
+                    <span class="label">CPM</span>
+                </div>
+                <div class="metric-card">
+                    <span class="value" id="res-accuracy">0%</span>
+                    <span class="label">Accuracy</span>
+                </div>
+            </div>
+
+            <div class="tier-display">
+                <h3>Your Typing Tier:</h3>
+                <div id="tier-badge" class="badge">🐢 Tortoise</div>
+            </div>
+
+            <button id="restart-btn" onclick="resetTest()">Try Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
